@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Primary Meta Tags -->
+  <!-- TODO: Replace with your paper title and author names -->
+  <meta name="title" content="CAD-Factory">
+  <!-- TODO: Write a compelling 150-160 character description of your research -->
+  <meta name="description" content="CAD-Factory translates natural language instructions into executable and editable parametric CAD programs through structured planning and code generation.">
+  <!-- TODO: Add 5-10 relevant keywords for your research area -->
+  <meta name="keywords" content="Computer-Aided Design, Parametric CAD Modeling, Text-to-CAD Generation, CAD Code Generation, Large Language Models, Multi-Agent System">
+  <!-- TODO: List all authors -->
+  <meta name="author" content="Yang Liu, Daxuan Ren, Yijie Ding, Jianmin Zheng, Fang Deng">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <!-- TODO: Replace with your institution or lab name -->
+  <meta property="og:site_name" content="Beijing Institute of Technology and Nanyang Technological University">
+  <!-- TODO: Same as paper title above -->
+  <meta property="og:title" content="CAD-Factory: A Language-Driven CAD Generation System">
+  <!-- TODO: Same as description above -->
+  <meta property="og:description" content="CAD-Factory translates natural language instructions into executable and editable parametric CAD programs through structured planning and code generation.">
+  <!-- TODO: Replace with your actual website URL -->
+  <meta property="og:url" content="https://cadfactoryrepository-source.github.io/">
+  <!-- TODO: Create a 1200x630px preview image and update path -->
+  <meta property="og:image" content="https://cadfactoryrepository-source.github.io/static/images/social_preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="CAD-Factory - Research Preview">
+  <meta property="article:published_time" content="2024-01-01T00:00:00.000Z">
+  <meta property="article:author" content="Yang Liu">
+  <meta property="article:section" content="Research">
+  <meta property="article:tag" content="Computer-Aided Design">
+  <meta property="article:tag" content="Large Language Models">
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="CAD-Factory: A Language-Driven CAD Generation System">
+  <meta name="citation_author" content="Liu, Yang">
+  <meta name="citation_author" content="Ren, Daxuan">
+  <meta name="citation_author" content="Ding, Yijie">
+  <meta name="citation_author" content="Zheng, Jianmin">
+  <meta name="citation_author" content="Deng, Fang">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_conference_title" content="In Proceedings of the Special Interest Group on Computer Graphics and Interactive Techniques Conference Conference Papers (SIGGRAPH)">
+  <meta name="citation_pdf_url" content="https://cadfactoryrepository-source.github.io/static/pdfs/paper.pdf">
+  
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#9D8B75">
+  <meta name="msapplication-TileColor" content="#9D8B75">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://documentcloud.adobe.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+
+  <!-- TODO: Replace with your paper title and authors -->
+  <title>CAD-Factory</title>
+  
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  
+  <!-- Carousel styling -->
+  <style>
+    /* Disable overscroll bounce effect */
+    html, body {
+      overscroll-behavior: none;
+      overflow-y: scroll;
+    }
+    
+    /* Import artistic fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@700;800&display=swap');
+    
+    /* Style CAD-Factory title */
+    .cad-factory-title {
+      font-weight: 900;
+    }
+    /* Hide carousel indicators */
+    .carousel .carousel-nav, 
+    .carousel .carousel-dots,
+    .carousel-indicators { 
+      display: none !important; 
+    }
+    
+    /* Fix carousel height based on image 3 size */
+    .nested-results-carousel {
+      height: 700px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .nested-results-carousel .carousel-item {
+      height: 700px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .nested-results-carousel .image {
+      max-height: 650px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    
+    .nested-results-carousel img {
+      max-height: 600px;
+      width: auto;
+    }
+  </style>
+  
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+  
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- MathJax for LaTeX rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+  
+  <!-- Structured Data for Academic Papers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "PAPER_TITLE",
+    "description": "BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS",
+    "author": [
+      {
+        "@type": "Person",
+        "name": "FIRST_AUTHOR_NAME",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "INSTITUTION_NAME"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "SECOND_AUTHOR_NAME",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "INSTITUTION_NAME"
+        }
+      }
+    ],
+    "datePublished": "2024-01-01",
+    "publisher": {
+      "@type": "Organization",
+      "name": "CONFERENCE_OR_JOURNAL_NAME"
+    },
+    "url": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE",
+    "image": "https://YOUR_DOMAIN.com/static/images/social_preview.png",
+    "keywords": ["KEYWORD1", "KEYWORD2", "KEYWORD3", "machine learning", "computer vision"],
+    "abstract": "FULL_ABSTRACT_TEXT_HERE",
+    "citation": "BIBTEX_CITATION_HERE",
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "mainEntity": {
+      "@type": "WebPage",
+      "@id": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE"
+    },
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "RESEARCH_AREA_1"
+      },
+      {
+        "@type": "Thing", 
+        "name": "RESEARCH_AREA_2"
+      }
+    ]
+  }
+  </script>
+  
+  <!-- Website/Organization Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "INSTITUTION_OR_LAB_NAME",
+    "url": "https://YOUR_INSTITUTION_WEBSITE.com",
+    "sameAs": [
+      "https://twitter.com/YOUR_TWITTER_HANDLE",
+      "https://github.com/YOUR_GITHUB_USERNAME"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <main id="main-content">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <!-- TODO: Replace with your paper title -->
+            <h1 class="title is-1 publication-title">CAD-Factory: A Language-Driven CAD Generation System</h1>
+            <div class="is-size-4 publication-authors has-text-weight-bold">
+              <!-- TODO: Replace with your paper authors and their personal links -->
+              <span class="author-block">
+                  Yang Liu<sup>1,2</sup>,
+                  </span>
+                  <span class="author-block">
+                    Daxuan Ren<sup>2</sup>,
+                  </span>
+                  <span class="author-block">
+                    Yijie Ding<sup>2</sup>,
+                  </span>
+                  <span class="author-block">
+                    Jianmin Zheng<sup>2</sup>,
+                  </span>
+                  <span class="author-block">
+                    Fang Deng<sup>1,*</sup>
+                </span>
+                  </div>
+
+                  <div class="is-size-6 publication-authors">
+                    <!-- TODO: Replace with your institution and conference/journal info -->
+                    <span class="author-block">
+                        <sup>1</sup>Beijing Institute of Technology &nbsp;&nbsp; <sup>2</sup>Nanyang Technological University<br>
+                        <sup>*</sup>Corresponding Author<br>
+                        ACM SIGGRAPH 2026
+                      </span>
+                  </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                         <!-- TODO: Update with your arXiv paper ID -->
+                      <span class="link-block">
+                        <a href="static/pdfs/paper.pdf" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
+
+                  <!-- TODO: Add supplementary material PDF -->
+                  <span class="link-block">
+                    <a href="static/pdfs/supplementary_material.pdf" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Supp</span>
+                  </a>
+                </span>
+
+                <!-- TODO: Replace with your GitHub repository URL -->
+                <span class="link-block">
+                  <a href="https://github.com/cadfactoryrepository-source/cadfactory.github.io" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Teaser image-->
+<section class="hero teaser" style="padding: 1.5rem 0;">
+  <div class="container is-max-desktop" style="max-width: 60%;">
+    <div class="hero-body" style="padding: 1.5rem;">
+      <!-- TODO: Replace with your image description -->
+      <h2 class="subtitle has-text-centered" style="font-size: 1.2rem;">
+        <span class="cad-factory-title">CAD-Factory:</span> Text-to-CAD generation system for modeling, editing, and design exploration.
+      </h2>
+      <!-- TODO: Replace with your teaser image -->
+      <img src="static/images/figure_tesear.png" alt="CAD-Factory Overview" style="width: 100%; height: auto; display: block; margin: 1.5rem auto;">
+    </div>
+  </div>
+</section>
+<!-- End teaser video -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full" style="max-width: 900px;">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <!-- TODO: Replace with your paper abstract -->
+          <p style="font-size: 0.95rem; line-height: 1.8;">
+            Advances in large language models (LLMs) have sparked interest in automating parametric CAD modeling through natural language.
+            Existing LLM-based approaches often treat CAD modeling as flat text generation, overlooking the hierarchical structure and geometric constraints inherent in CAD programs. 
+            We present CAD-Factory, a Text-to-CAD generation system for language-driven CAD modeling that explicitly models the structural and parametric semantics of CAD programs. 
+            Our core contribution is a new formulation of CAD generation as structured program synthesis, coupled with a learnable hierarchical CAD program representation that disentangles structural topology from parameter instantiation. 
+            Building on this formulation, CAD-Factory adopts a manager–programmer–reviewer architecture: a planning agent infers program hierarchy, a coding agent instantiates symbolic and numerical parameters, and an evaluation module enforces structural validity and geometric feasibility, which supports structure-aware reasoning, constraint-consistent generation, and interpretable program synthesis.
+            An editor–renderer loop further enables part-aware code refinement through visual feedback, supporting iterative and controllable design workflows. 
+            We also contribute a process-oriented annotation pipeline and a Text--CAD dataset with parameter-free or partially specified descriptions that reflect real-world design expression. 
+            Extensive experiments demonstrate that CAD-Factory significantly improves structural correctness and geometric consistency across diverse CAD code generation and editing tasks, establishing a structured, interpretable, and robust framework for AI-assisted design.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+
+<!-- Image carousel -->
+<section class="hero is-small" style="padding: 0.75rem 1.5rem;">
+  <div class="hero-body" style="padding: 0.5rem 0;">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+       <div class="item" style="max-width: 1200px; padding: 1.5rem; margin: 0 auto;">
+        <!-- Framework image title -->
+        <h3 class="title is-5 has-text-centered" style="margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+          <img src="static/icons/gear_1.png" alt="Gear" style="height: 3rem; width: auto;"/>
+          System Overview
+          <img src="static/icons/gear_1.png" alt="Gear" style="height: 3rem; width: auto;"/>
+        </h3>
+        <!-- Framework image -->
+        <img src="static/images/figure_framework.png" alt="CAD-Factory Framework" loading="lazy" style="width: 80%; height: auto; margin: 0 auto; display: block;"/>
+        <!-- Framework description -->
+        <h2 class="subtitle has-text-centered" style="font-size: 0.75rem; margin-top: 1rem;">
+          CAD-Factory decomposes CAD generation into structure planning and parameter completion, with execution validation for reliability. It supports instruction-based editing, guided by global and part-level renderings. Starred stages denote model outputs.
+        </h2>
+      </div>
+      <div class="item" style="max-width: 1200px; padding: 1.5rem; margin: 0 auto;">
+        <!-- Dataset title -->
+        <h3 class="title is-5 has-text-centered" style="margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+          <img src="static/icons/data_2.png" alt="Data" style="height: 3rem; width: auto;"/>
+          Dataset Construction Pipeline
+          <img src="static/icons/data_2.png" alt="Data" style="height: 3rem; width: auto;"/>
+        </h3>
+        <!-- Dataset image -->
+        <img src="static/images/figure_dataset.png" alt="Dataset Annotation" loading="lazy" style="width: 80%; height: auto; margin: 0 auto; display: block;"/>
+        <h2 class="subtitle has-text-centered" style="font-size: 0.75rem; margin-top: 1rem;">
+          Each CAD part is first described using its sketch, extrusion, and operation renderings along with the AST to produce part-level descriptions via an MLLM. These are then sequentially aggregated and refined with full-rendering context to form a process-aligned global description.
+        </h2>
+      </div>
+      <div class="item" style="max-width: 1200px; padding: 1.5rem; margin: 0 auto;">
+        <!-- Qualitative Results title -->
+        <h3 class="title is-5 has-text-centered" style="margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+          <img src="static/icons/idea_1.png" alt="Cloud" style="height: 3rem; width: auto;"/>
+          Qualitative Results
+          <img src="static/icons/idea_1.png" alt="Cloud" style="height: 3rem; width: auto;"/>
+        </h3>
+        <!-- Qualitative Results Carousel -->
+        <div class="carousel nested-results-carousel" style="margin: 0 auto; max-width: 100%;">
+          <div class="carousel-item">
+            <figure class="image">
+              <img src="static/images/figure_pf_results_1.png" alt="Text-to-CAD generation" loading="lazy" style="width: 80%; height: auto; margin: 0 auto; display: block;"/>
+            </figure>
+            <div style="margin-top: 1rem;">
+              <h3 class="subtitle has-text-centered" style="font-size: 0.75rem;">
+                Text-to-CAD generation in the parameter-free setting.
+              </h3>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <figure class="image">
+              <img src="static/images/figure_pf_results_2.png" alt="Cross-dataset generation" loading="lazy" style="width: 80%; height: auto; margin: 0 auto; display: block;"/>
+            </figure>
+            <div style="margin-top: 1rem;">
+              <h3 class="subtitle has-text-centered" style="font-size: 0.75rem;">
+                Cross-dataset Text-to-CAD generation in the parameter-free setting.
+              </h3>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <figure class="image">
+              <img src="static/images/figure_pf_results_3.png" alt="Unconditional generation" loading="lazy" style="width: 80%; height: auto; margin: 0 auto; display: block;"/>
+            </figure>
+            <div style="margin-top: 1rem;">
+              <h3 class="subtitle has-text-centered" style="font-size: 0.75rem;">
+                Unconditional CAD generation.
+              </h3>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <figure class="image">
+              <img src="static/images/figure_pf_results_4.png" alt="CAD editing applications" loading="lazy" style="width: 80%; height: auto; margin: 0 auto; display: block;"/>
+            </figure>
+            <div style="margin-top: 1rem;">
+              <h3 class="subtitle has-text-centered" style="font-size: 0.75rem;">
+                CAD editing and design exploration applications.
+              </h3>
+            </div>
+          </div>
+        </div>
+     </div>
+  </div>
+</div>
+</div>
+</section>
+<!-- End image carousel -->
+
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="bibtex-header">
+        <h2 class="title">BibTeX</h2>
+        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+          <i class="fas fa-copy"></i>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+      <pre id="bibtex-code"><code>@inproceedings{liu2026cadfactory,
+  title={CAD-Factory: A Language-Driven CAD Generation System},
+  author={Liu, Yang and Ren, Daxuan and Ding, Yijie and Zheng, Jianmin and Deng, Fang},
+  booktitle={In Proceedings of the Special Interest Group on Computer Graphics and Interactive Techniques Conference Conference Papers (SIGGRAPH)},
+  year={2026}
+}</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+<!-- Carousel initialization script for results -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize the nested carousel for results
+    const nestedCarousel = document.querySelector('.nested-results-carousel');
+    if (nestedCarousel && typeof bulmaCarousel !== 'undefined') {
+        const instance = bulmaCarousel.attach(nestedCarousel, {
+            initialSlide: 0,
+            autoplay: false,
+            loop: true
+        });
+    }
+});
+</script>
+
+  </body>
+  </html>
