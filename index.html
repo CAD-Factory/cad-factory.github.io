@@ -46,7 +46,7 @@
   <meta name="citation_author" content="Deng, Fang">
   <meta name="citation_publication_date" content="2026">
   <meta name="citation_conference_title" content="In Proceedings of the Special Interest Group on Computer Graphics and Interactive Techniques Conference Conference Papers (SIGGRAPH)">
-  <meta name="citation_pdf_url" content="https://cadfactoryrepository-source.github.io/static/pdfs/paper.pdf">
+  <meta name="citation_pdf_url" content="https://cadfactoryrepository-source.github.io/pdf/main.pdf">
   
   <!-- Additional SEO -->
   <meta name="theme-color" content="#9D8B75">
@@ -91,15 +91,15 @@
       display: none !important; 
     }
     
-    /* Fix carousel height based on image 3 size */
-    .nested-results-carousel {
+    /* Fix qualitative carousel height based on image size */
+    .qualitative-results-carousel {
       height: 700px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
     
-    .nested-results-carousel .carousel-item {
+    .qualitative-results-carousel .carousel-item {
       height: 700px;
       display: flex;
       flex-direction: column;
@@ -107,16 +107,18 @@
       justify-content: center;
     }
     
-    .nested-results-carousel .image {
+    .qualitative-results-carousel .image {
       max-height: 650px;
       overflow: hidden;
       display: flex;
       align-items: center;
     }
     
-    .nested-results-carousel img {
+    .qualitative-results-carousel .image img {
       max-height: 600px;
-      width: auto;
+      width: 80%;
+      max-width: 100%;
+      object-fit: contain;
     }
   </style>
   
@@ -242,7 +244,7 @@
         <div class="columns is-centered">
           <div class="column has-text-centered">
             <!-- TODO: Replace with your paper title -->
-            <h1 class="title is-1 publication-title">CAD-Factory: A Language-Driven CAD Generation System</h1>
+            <h1 class="title is-1 publication-title">CAD-Factory: A Language-Driven<br>CAD Generation System</h1>
             <div class="is-size-4 publication-authors has-text-weight-bold">
               <!-- TODO: Replace with your paper authors and their personal links -->
               <span class="author-block">
@@ -275,7 +277,7 @@
                     <div class="publication-links">
                          <!-- TODO: Update with your arXiv paper ID -->
                       <span class="link-block">
-                        <a href="static/pdfs/paper.pdf" target="_blank"
+                        <a href="pdf/main.pdf" target="_blank"
                         class="external-link button is-normal is-rounded is-dark">
                         <span class="icon">
                           <i class="fas fa-file-pdf"></i>
@@ -286,7 +288,7 @@
 
                   <!-- TODO: Add supplementary material PDF -->
                   <span class="link-block">
-                    <a href="static/pdfs/supplementary_material.pdf" target="_blank"
+                    <a href="pdf/appendix.pdf" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -295,16 +297,6 @@
                   </a>
                 </span>
 
-                <!-- TODO: Replace with your GitHub repository URL -->
-                <span class="link-block">
-                  <a href="https://github.com/cadfactoryrepository-source/cadfactory.github.io" target="_blank"
-                  class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code</span>
-                </a>
-              </span>
             </div>
           </div>
         </div>
@@ -319,7 +311,7 @@
   <div class="container is-max-desktop" style="max-width: 60%;">
     <div class="hero-body" style="padding: 1.5rem;">
       <!-- TODO: Replace with your image description -->
-      <h2 class="subtitle has-text-centered" style="font-size: 1.2rem;">
+      <h2 class="subtitle has-text-centered teaser-caption">
         <span class="cad-factory-title">CAD-Factory:</span> Text-to-CAD generation system for modeling, editing, and design exploration.
       </h2>
       <!-- TODO: Replace with your teaser image -->
@@ -355,94 +347,97 @@
 <!-- End paper abstract -->
 
 
-<!-- Image carousel -->
-<section class="hero is-small" style="padding: 0.75rem 1.5rem;">
-  <div class="hero-body" style="padding: 0.5rem 0;">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-       <div class="item" style="max-width: 1200px; padding: 1.5rem; margin: 0 auto;">
-        <!-- Framework image title -->
-        <h3 class="title is-5 has-text-centered" style="margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-          <img src="static/icons/gear_1.png" alt="Gear" style="height: 3rem; width: auto;"/>
-          System Overview
-          <img src="static/icons/gear_1.png" alt="Gear" style="height: 3rem; width: auto;"/>
-        </h3>
-        <!-- Framework image -->
-        <img src="static/images/figure_framework.png" alt="CAD-Factory Framework" loading="lazy" style="width: 80%; height: auto; margin: 0 auto; display: block;"/>
-        <!-- Framework description -->
-        <h2 class="subtitle has-text-centered" style="font-size: 0.75rem; margin-top: 1rem;">
-          CAD-Factory decomposes CAD generation into structure planning and parameter completion, with execution validation for reliability. It supports instruction-based editing, guided by global and part-level renderings. Starred stages denote model outputs.
-        </h2>
-      </div>
-      <div class="item" style="max-width: 1200px; padding: 1.5rem; margin: 0 auto;">
-        <!-- Dataset title -->
-        <h3 class="title is-5 has-text-centered" style="margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-          <img src="static/icons/data_2.png" alt="Data" style="height: 3rem; width: auto;"/>
-          Dataset Construction Pipeline
-          <img src="static/icons/data_2.png" alt="Data" style="height: 3rem; width: auto;"/>
-        </h3>
-        <!-- Dataset image -->
-        <img src="static/images/figure_dataset.png" alt="Dataset Annotation" loading="lazy" style="width: 80%; height: auto; margin: 0 auto; display: block;"/>
-        <h2 class="subtitle has-text-centered" style="font-size: 0.75rem; margin-top: 1rem;">
-          Each CAD part is first described using its sketch, extrusion, and operation renderings along with the AST to produce part-level descriptions via an MLLM. These are then sequentially aggregated and refined with full-rendering context to form a process-aligned global description.
-        </h2>
-      </div>
-      <div class="item" style="max-width: 1200px; padding: 1.5rem; margin: 0 auto;">
-        <!-- Qualitative Results title -->
-        <h3 class="title is-5 has-text-centered" style="margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-          <img src="static/icons/idea_1.png" alt="Cloud" style="height: 3rem; width: auto;"/>
-          Qualitative Results
-          <img src="static/icons/idea_1.png" alt="Cloud" style="height: 3rem; width: auto;"/>
-        </h3>
-        <!-- Qualitative Results Carousel -->
-        <div class="carousel nested-results-carousel" style="margin: 0 auto; max-width: 100%;">
+<!-- System Overview -->
+<section class="section visual-section">
+  <div class="container">
+    <div class="visual-block">
+      <h3 class="title is-5 has-text-centered visual-title">
+        <img class="title-icon" src="static/icons/framework.png" alt="" aria-hidden="true" />
+        <span class="title-text">System Overview</span>
+        <img class="title-icon" src="static/icons/framework.png" alt="" aria-hidden="true" />
+      </h3>
+      <img class="visual-figure" src="static/images/figure_framework.png" alt="CAD-Factory Framework" loading="lazy" />
+      <h2 class="subtitle has-text-centered visual-caption">
+        CAD-Factory decomposes CAD generation into structure planning and parameter completion, with execution validation for reliability. It supports instruction-based editing, guided by global and part-level renderings. Starred stages denote model outputs.
+      </h2>
+    </div>
+  </div>
+</section>
+<!-- End System Overview -->
+
+<!-- Dataset Construction Pipeline -->
+<section class="section visual-section">
+  <div class="container">
+    <div class="visual-block">
+      <h3 class="title is-5 has-text-centered visual-title">
+        <img class="title-icon" src="static/icons/dataset.png" alt="" aria-hidden="true" />
+        <span class="title-text">Dataset Construction Pipeline</span>
+        <img class="title-icon" src="static/icons/dataset.png" alt="" aria-hidden="true" />
+      </h3>
+      <img class="visual-figure" src="static/images/figure_dataset.png" alt="Dataset Annotation" loading="lazy" />
+      <h2 class="subtitle has-text-centered visual-caption">
+        Each CAD part is first described using its sketch, extrusion, and operation renderings along with the AST to produce part-level descriptions via an MLLM. These are then sequentially aggregated and refined with full-rendering context to form a process-aligned global description.
+      </h2>
+    </div>
+  </div>
+</section>
+<!-- End Dataset Construction Pipeline -->
+
+<!-- Qualitative Results -->
+<section class="section visual-section">
+  <div class="container">
+    <div class="visual-block">
+      <h3 class="title is-5 has-text-centered visual-title">
+        <img class="title-icon" src="static/icons/results.png" alt="" aria-hidden="true" />
+        <span class="title-text">Qualitative Results</span>
+        <img class="title-icon" src="static/icons/results.png" alt="" aria-hidden="true" />
+      </h3>
+      <div class="carousel qualitative-results-carousel">
           <div class="carousel-item">
             <figure class="image">
-              <img src="static/images/figure_pf_results_1.png" alt="Text-to-CAD generation" loading="lazy" style="width: 80%; height: auto; margin: 0 auto; display: block;"/>
+              <img src="static/images/figure_pf_results_1.png" alt="Text-to-CAD generation" loading="lazy" />
             </figure>
             <div style="margin-top: 1rem;">
-              <h3 class="subtitle has-text-centered" style="font-size: 0.75rem;">
+              <h3 class="subtitle has-text-centered visual-caption">
                 Text-to-CAD generation in the parameter-free setting.
               </h3>
             </div>
           </div>
           <div class="carousel-item">
             <figure class="image">
-              <img src="static/images/figure_pf_results_2.png" alt="Cross-dataset generation" loading="lazy" style="width: 80%; height: auto; margin: 0 auto; display: block;"/>
+              <img src="static/images/figure_pf_results_2.png" alt="Cross-dataset generation" loading="lazy" />
             </figure>
             <div style="margin-top: 1rem;">
-              <h3 class="subtitle has-text-centered" style="font-size: 0.75rem;">
+              <h3 class="subtitle has-text-centered visual-caption">
                 Cross-dataset Text-to-CAD generation in the parameter-free setting.
               </h3>
             </div>
           </div>
           <div class="carousel-item">
             <figure class="image">
-              <img src="static/images/figure_pf_results_3.png" alt="Unconditional generation" loading="lazy" style="width: 80%; height: auto; margin: 0 auto; display: block;"/>
+              <img src="static/images/figure_pf_results_3.png" alt="Unconditional generation" loading="lazy" />
             </figure>
             <div style="margin-top: 1rem;">
-              <h3 class="subtitle has-text-centered" style="font-size: 0.75rem;">
+              <h3 class="subtitle has-text-centered visual-caption">
                 Unconditional CAD generation.
               </h3>
             </div>
           </div>
           <div class="carousel-item">
             <figure class="image">
-              <img src="static/images/figure_pf_results_4.png" alt="CAD editing applications" loading="lazy" style="width: 80%; height: auto; margin: 0 auto; display: block;"/>
+              <img src="static/images/figure_pf_results_4.png" alt="CAD editing applications" loading="lazy" />
             </figure>
             <div style="margin-top: 1rem;">
-              <h3 class="subtitle has-text-centered" style="font-size: 0.75rem;">
+              <h3 class="subtitle has-text-centered visual-caption">
                 CAD editing and design exploration applications.
               </h3>
             </div>
           </div>
         </div>
-     </div>
+    </div>
   </div>
-</div>
-</div>
 </section>
-<!-- End image carousel -->
+<!-- End Qualitative Results -->
 
 
 <!--BibTex citation -->
@@ -484,21 +479,6 @@
 <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
 
     <!-- End of Statcounter Code -->
-
-<!-- Carousel initialization script for results -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize the nested carousel for results
-    const nestedCarousel = document.querySelector('.nested-results-carousel');
-    if (nestedCarousel && typeof bulmaCarousel !== 'undefined') {
-        const instance = bulmaCarousel.attach(nestedCarousel, {
-            initialSlide: 0,
-            autoplay: false,
-            loop: true
-        });
-    }
-});
-</script>
 
   </body>
   </html>

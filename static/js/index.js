@@ -78,7 +78,7 @@ window.addEventListener('scroll', function() {
 
 // Video carousel autoplay when in view
 function setupVideoCarouselAutoplay() {
-    const carouselVideos = document.querySelectorAll('.results-carousel video');
+    const carouselVideos = document.querySelectorAll('.qualitative-results-carousel video');
     
     if (carouselVideos.length === 0) return;
     
@@ -117,8 +117,8 @@ $(document).ready(function() {
 		autoplaySpeed: 5000,
     }
 
-	// Initialize all div with carousel class
-    var carousels = bulmaCarousel.attach('.carousel', options);
+	// Initialize only the qualitative results carousel.
+    var carousels = bulmaCarousel.attach('.qualitative-results-carousel', options);
 	
     bulmaSlider.attach();
     

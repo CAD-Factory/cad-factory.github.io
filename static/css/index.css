@@ -122,6 +122,12 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
+.teaser-caption {
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  line-height: 1.5;
+}
+
 
 /* Publication Content Styling */
 .publication-title {
@@ -263,13 +269,13 @@ body {
   box-shadow: var(--shadow-lg);
 }
 
-.results-carousel {
-  overflow: hidden;
-  padding: 1rem 0;
+.visual-section {
+  padding: 1.25rem 1.5rem;
 }
 
-.results-carousel .item {
-  margin: 1rem;
+.visual-block {
+  max-width: 1200px;
+  margin: 0 auto;
   overflow: hidden;
   padding: 1.5rem;
   font-size: 0;
@@ -280,24 +286,55 @@ body {
   border: 1px solid var(--border-color);
 }
 
-.results-carousel .item:hover {
+.visual-block:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
 }
 
-.results-carousel .item img,
-.results-carousel video {
-  margin: 0;
-  border-radius: var(--border-radius);
-  width: 100%;
-  height: auto;
+.visual-title {
+  margin-bottom: 1rem !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+  line-height: 1.2;
 }
 
-.results-carousel .subtitle {
-  font-size: 1rem !important;
+.visual-title .title-icon {
+  display: inline-block !important;
+  width: auto !important;
+  height: 3rem !important;
+  max-width: 3rem !important;
+  max-height: 3rem !important;
+  min-width: 3rem;
+  margin: 0 !important;
+  object-fit: contain;
+  border-radius: 0;
+  flex: 0 0 auto;
+}
+
+.visual-title .title-text {
+  display: inline-block;
+  flex: 0 1 auto;
+}
+
+.visual-figure,
+.qualitative-results-carousel .image img,
+.qualitative-results-carousel video {
+  width: 80%;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+  border-radius: var(--border-radius);
+}
+
+.visual-caption {
+  font-size: 0.95rem !important;
   color: var(--text-secondary);
   margin-top: 1rem;
   font-weight: 500;
+  line-height: 1.55;
 }
 
 /* Pagination and Misc Improvements */
@@ -652,9 +689,26 @@ code {
     top: auto;
   }
   
-  .results-carousel .item {
+  .visual-block {
     margin: 0.5rem;
     padding: 1rem;
+  }
+
+  .visual-figure,
+  .qualitative-results-carousel .image img {
+    width: 100%;
+  }
+
+  .visual-title {
+    gap: 0.4rem;
+    white-space: normal;
+  }
+
+  .visual-title .title-icon {
+    height: 2.25rem !important;
+    max-width: 2.25rem !important;
+    max-height: 2.25rem !important;
+    min-width: 2.25rem;
   }
   
   .teaser .hero-body {
@@ -758,6 +812,3 @@ a:focus {
     box-shadow: none !important;
   }
 }
-
-
-
